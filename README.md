@@ -148,7 +148,23 @@ cd backend
 npm run build:widget
 ```
 
-## 📦 SDK Integration
+## � Deployment to Vercel
+
+Both the backend and frontend can be deployed to Vercel as separate projects.
+
+### Quick Start
+
+1. Push your repository to GitHub
+2. Deploy backend to Vercel:
+   - Root directory: `./backend`
+   - Environment variables: `MONGODB_URI`, `GEMINI_API_KEY`
+3. Deploy frontend to Vercel:
+   - Root directory: `./frontend`
+   - Environment variable: `NEXT_PUBLIC_API_URL=<your-backend-url>`
+
+**For detailed instructions**, see [DEPLOYMENT.md](./DEPLOYMENT.md)
+
+## �📦 SDK Integration
 
 ### Basic Integration
 
