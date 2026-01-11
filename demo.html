@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vet Chatbot SDK Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      color: #10b981;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      color: #666;
+    }
+    
+    .hero {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .hero h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    
+    .hero p {
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .feature-card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+    
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #111;
+    }
+    
+    .feature-card p {
+      color: #666;
+      font-size: 0.95rem;
+    }
+    
+    .code-block {
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+    
+    .code-block code {
+      color: #e2e8f0;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.9rem;
+      white-space: pre;
+    }
+    
+    .cta {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .cta:hover {
+      background: #059669;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .badge {
+      display: inline-block;
+      background: #f0fdf4;
+      color: #10b981;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">🐾 Demo Page</span>
+      <h1>Veterinary Chatbot SDK</h1>
+      <p class="subtitle">Try the chatbot by clicking the button in the bottom-right corner</p>
+    </header>
+    
+    <div class="hero">
+      <h2>Welcome to Happy Paws Veterinary Clinic</h2>
+      <p>
+        We're here to help your furry friends stay healthy and happy! Use our AI-powered
+        chatbot to get answers about pet care or book an appointment.
+      </p>
+      <button class="cta" onclick="alert('Check out the chatbot in the bottom-right corner!')">
+        Get Started
+      </button>
+    </div>
+    
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">🩺</div>
+        <h3>Expert Pet Care Advice</h3>
+        <p>Get instant answers about vaccinations, nutrition, common illnesses, and preventive care for your pets.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Easy Appointment Booking</h3>
+        <p>Book a vet visit through our conversational chatbot. Just say "I want to book an appointment".</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>24/7 Availability</h3>
+        <p>Our AI assistant is always ready to help, whether it's 3 PM or 3 AM.</p>
+      </div>
+    </div>
+    
+    <div class="hero">
+      <h2>Integration Example</h2>
+      <p>Add this chatbot to your own website with just two lines of code:</p>
+      <div class="code-block">
+        <code>&lt;script&gt;
+  window.VetChatbotConfig = {
+    userName: "John Doe",
+    petName: "Buddy",
+    source: "demo-page"
+  };
+&lt;/script&gt;
+&lt;script src="http://localhost:5000/chatbot.js"&gt;&lt;/script&gt;</code>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Built with ❤️ for pet lovers everywhere | Veterinary Chatbot SDK Demo</p>
+  </footer>
+
+  <!-- Chatbot SDK Integration -->
+  <script>
+    window.VetChatbotConfig = {
+      userName: "Demo User",
+      petName: "Max",
+      source: "demo-page",
+      apiUrl: "http://localhost:5000"
+    };
+  </script>
+  <script src="http://localhost:5000/chatbot.js"></script>
+</body>
+</html>
