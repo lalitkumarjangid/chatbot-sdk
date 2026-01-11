@@ -3,13 +3,13 @@ import { z, ZodError } from 'zod';
 
 // Validation schemas
 export const chatMessageSchema = z.object({
-  sessionId: z.string().optional(),
+  sessionId: z.string().optional().nullable(),
   message: z.string().min(1, 'Message cannot be empty').max(2000, 'Message too long'),
   context: z.object({
-    userId: z.string().optional(),
-    userName: z.string().optional(),
-    petName: z.string().optional(),
-    source: z.string().optional(),
+    userId: z.string().optional().nullable(),
+    userName: z.string().optional().nullable(),
+    petName: z.string().optional().nullable(),
+    source: z.string().optional().nullable(),
   }).optional(),
 });
 

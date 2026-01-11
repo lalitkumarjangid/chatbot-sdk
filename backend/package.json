@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "build:widget": "vite build --config vite.widget.config.ts",
+    "start": "node dist/index.js",
+    "postinstall": "npm run build:widget"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
@@ -22,7 +24,12 @@
     "@types/express": "^4.17.21",
     "@types/node": "^22.0.0",
     "@types/uuid": "^10.0.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "tsx": "^4.16.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2",
+    "vite-plugin-css-injected-by-js": "^3.5.1"
   }
 }

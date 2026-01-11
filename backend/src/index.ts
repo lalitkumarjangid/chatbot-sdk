@@ -12,9 +12,9 @@ validateConfig();
 // Create Express app
 const app = express();
 
-// CORS configuration
+// CORS configuration - allow all origins for development (including file://)
 app.use(cors({
-  origin: config.corsOrigins,
+  origin: true,  // Allow all origins in development
   credentials: true,
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Session-Id'],

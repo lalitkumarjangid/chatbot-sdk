@@ -10,7 +10,7 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.tsx'),
+      entry: path.resolve(__dirname, 'src/widget/index.tsx'),
       name: 'VetChatbot',
       fileName: () => 'chatbot.js',
       formats: ['iife'],
@@ -23,7 +23,7 @@ export default defineConfig({
     },
     minify: 'esbuild',
     cssCodeSplit: false,
-    outDir: 'dist',
+    outDir: 'public',
   },
   define: {
     'process.env.NODE_ENV': JSON.stringify('production'),

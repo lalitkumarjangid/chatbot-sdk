@@ -184,12 +184,10 @@
       <div class="code-block">
         <code>&lt;script&gt;
   window.VetChatbotConfig = {
-    userName: "John Doe",
-    petName: "Buddy",
-    source: "demo-page"
+    apiUrl: "http://localhost:5001"  // Base URL without /api
   };
 &lt;/script&gt;
-&lt;script src="http://localhost:5000/chatbot.js"&gt;&lt;/script&gt;</code>
+&lt;script src="http://localhost:5001/chatbot.js"&gt;&lt;/script&gt;</code>
       </div>
     </div>
   </div>
@@ -201,12 +199,9 @@
   <!-- Chatbot SDK Integration -->
   <script>
     window.VetChatbotConfig = {
-      userName: "Demo User",
-      petName: "Max",
-      source: "demo-page",
-      apiUrl: "http://localhost:5000"
+      apiUrl: "http://localhost:5001"
     };
   </script>
-  <script src="http://localhost:5000/chatbot.js"></script>
+  <script src="http://localhost:5001/chatbot.js"></script>
 </body>
 </html>

@@ -76,7 +76,7 @@ class GeminiService {
 
     try {
       const genAI = new GoogleGenerativeAI(config.geminiApiKey);
-      this.model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      this.model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
       this.initialized = true;
       console.log('✅ Gemini AI service initialized');
     } catch (error) {
