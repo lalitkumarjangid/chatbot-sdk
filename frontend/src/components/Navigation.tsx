@@ -52,7 +52,7 @@ export function Navigation() {
         {/* Right side */}
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground" asChild>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/lalitkumarjangid/chatbot-sdk" target="_blank" rel="noopener noreferrer">
               <Github className="h-4 w-4" />
               <span className="hidden sm:inline">GitHub</span>
             </a>

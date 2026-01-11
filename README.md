@@ -56,7 +56,7 @@ A website-integrable chatbot SDK that answers veterinary-related questions and b
 
 ```
 chatbot-sdk/
-├── backend/                 # Express API Server
+├── backend/                 # Express API Server + SDK
 │   ├── src/
 │   │   ├── config/         # Database & environment config
 │   │   ├── controllers/    # Request handlers
@@ -64,26 +64,28 @@ chatbot-sdk/
 │   │   ├── models/         # Mongoose schemas
 │   │   ├── routes/         # API route definitions
 │   │   ├── services/       # Business logic (Gemini, Sessions)
+│   │   ├── widget/         # Embeddable SDK source
+│   │   │   ├── ChatWidget.tsx  # Main widget component
+│   │   │   ├── api.ts          # API client
+│   │   │   ├── types.ts        # TypeScript types
+│   │   │   ├── styles.css      # Widget styles
+│   │   │   └── index.tsx       # Entry point
 │   │   └── index.ts        # App entry point
+│   ├── public/             # Built SDK output (chatbot.js)
+│   ├── vite.widget.config.ts  # Vite library build config
 │   └── package.json
 │
 ├── frontend/               # Next.js Demo & Admin Site
 │   ├── src/
-│   │   ├── app/           # Next.js app router
+│   │   ├── app/           # Next.js app router pages
+│   │   │   ├── page.tsx       # Landing page
+│   │   │   ├── admin/         # Admin dashboard
+│   │   │   └── playground/    # API playground
 │   │   ├── components/    # UI components
 │   │   │   ├── chatbot/   # Chat widget components
 │   │   │   └── ui/        # shadcn components
 │   │   ├── lib/           # API client, utilities
 │   │   └── store/         # Zustand state management
-│   └── package.json
-│
-├── sdk/                    # Embeddable Script Bundle
-│   ├── src/
-│   │   ├── ChatWidget.tsx # Main widget component
-│   │   ├── api.ts         # API client
-│   │   ├── types.ts       # TypeScript types
-│   │   └── index.tsx      # Entry point
-│   ├── vite.config.ts     # Vite library build config
 │   └── package.json
 │
 ├── .env.example           # Environment template
@@ -135,24 +137,25 @@ mongod
 npm run dev
 
 # Or run individually:
-npm run dev:backend   # http://localhost:5000
+npm run dev:backend   # http://localhost:5001
 npm run dev:frontend  # http://localhost:3000
 ```
 
-5. **Build the SDK**
+5. **Build the SDK** (outputs to `backend/public/chatbot.js`)
 
 ```bash
-npm run build:sdk
+cd backend
+npm run build:widget
 ```
 
 ## 📦 SDK Integration
 
 ### Basic Integration
 
-Add this single script tag to embed the chatbot:
+Add this single script tag to embed the chatbot (SDK is served from the backend):
 
 ```html
-<script src="https://your-domain.com/chatbot.js"></script>
+<script src="https://your-backend-domain.com/chatbot.js"></script>
 ```
 
 ### With User Context (Optional)
@@ -162,15 +165,14 @@ Pass contextual data to personalize the experience:
 ```html
 <script>
   window.VetChatbotConfig = {
-    userId: "user_123",
-    userName: "John Doe",
-    petName: "Buddy",
-    source: "marketing-website",
-    apiUrl: "https://your-api-domain.com", // Optional: custom API URL
-    primaryColor: "#10b981" // Optional: customize theme color
+    apiUrl: "https://your-backend-domain.com", // Required: your backend URL
+    userId: "user_123",      // Optional: user identifier
+    userName: "John Doe",    // Optional: personalization
+    petName: "Buddy",        // Optional: pet context
+    source: "marketing-website" // Optional: tracking source
   };
 </script>
-<script src="https://your-domain.com/chatbot.js"></script>
+<script src="https://your-backend-domain.com/chatbot.js"></script>
 ```
 
 ## 🔌 API Reference
@@ -207,7 +209,7 @@ Pass contextual data to personalize the experience:
 ### Example: Send Message
 
 ```bash
-curl -X POST http://localhost:5000/api/chat/message \
+curl -X POST http://localhost:5001/api/chat/message \
   -H "Content-Type: application/json" \
   -d '{
     "message": "What vaccines does my puppy need?",
@@ -249,10 +251,11 @@ The appointment booking uses a **backend state machine** rather than a frontend 
 
 ### 3. SDK Bundle Strategy
 
+- SDK source lives in `backend/src/widget/` for simplified deployment
 - Uses **Vite library mode** with IIFE output
+- Built SDK served as static file from backend (`/chatbot.js`)
 - CSS injected by JS (no separate stylesheet)
 - All dependencies bundled (no external React required)
-- ~150KB minified bundle
 
 ### 4. Veterinary-Only Responses
 
