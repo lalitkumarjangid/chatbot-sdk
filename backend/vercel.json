@@ -3,18 +3,13 @@
   "builds": [
     {
       "src": "api/index.ts",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["public/**", "src/**"]
+      }
     }
   ],
   "routes": [
-    {
-      "src": "/chatbot.js",
-      "dest": "/public/chatbot.js"
-    },
     {
       "src": "/(.*)",
       "dest": "api/index.ts"

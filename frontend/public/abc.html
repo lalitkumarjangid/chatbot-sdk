@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Add this before </body> -->
-<script src="https://chatsdkbot.vercel.app/chatbot.js"></script>
+    <title>Chatbot Demo</title>
 </head>
 <body>
-    
+    <h1>My Website</h1>
+    <p>The chatbot should appear in the bottom-right corner.</p>
+
+    <!-- Chatbot Configuration -->
+    <script>
+        window.VetChatbotConfig = {
+            apiUrl: "https://chatsdkbot.vercel.app"
+        };
+    </script>
+    <!-- Chatbot Script -->
+    <script src="https://chatsdkbot.vercel.app/chatbot.js"></script>
 </body>
 </html>
