@@ -2,6 +2,27 @@
 
 A website-integrable chatbot SDK that answers veterinary-related questions and books veterinary appointments. Built with Next.js, Express, MongoDB, and Google Gemini AI.
 
+## 🌐 Live Demo
+
+| Service | URL |
+|---------|-----|
+| **Frontend Demo** | [https://chatbot-sdk-frontend.vercel.app](https://chatbot-sdk-frontend.vercel.app) |
+| **Backend API** | [https://chatsdkbot.vercel.app](https://chatsdkbot.vercel.app) |
+| **GitHub Repository** | [https://github.com/lalitkumarjangid/chatbot-sdk](https://github.com/lalitkumarjangid/chatbot-sdk) |
+
+### Quick Test
+
+Add this to any HTML page to test the chatbot:
+
+```html
+<script>
+  window.VetChatbotConfig = {
+    apiUrl: "https://chatsdkbot.vercel.app"
+  };
+</script>
+<script src="https://chatsdkbot.vercel.app/chatbot.js"></script>
+```
+
 ![Chatbot Demo](./docs/demo.png)
 
 ## 🎯 Features
