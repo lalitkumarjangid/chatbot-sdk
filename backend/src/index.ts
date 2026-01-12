@@ -2,15 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
 import { config, validateConfig } from './config/index.js';
 import { connectDatabase } from './config/database.js';
 import routes from './routes/index.js';
 import { errorHandler, notFoundHandler } from './middleware/index.js';
-
-// Get __dirname equivalent in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Validate configuration
 validateConfig();
@@ -57,19 +52,21 @@ app.use('/api', routes);
 // Serve SDK script - handle Vercel's different path structure
 app.get('/chatbot.js', (req, res) => {
   // Try multiple possible paths for the chatbot.js file
+  const cwd = process.cwd();
   const possiblePaths = [
-    path.resolve(__dirname, '../public/chatbot.js'),
-    path.resolve(process.cwd(), 'public/chatbot.js'),
-    path.resolve(process.cwd(), 'backend/public/chatbot.js'),
+    path.join(cwd, 'public/chatbot.js'),
+    path.join(cwd, 'backend/public/chatbot.js'),
+    '/var/task/public/chatbot.js',
     '/var/task/backend/public/chatbot.js',
   ];
 
   for (const filePath of possiblePaths) {
     try {
       if (fs.existsSync(filePath)) {
+        const content = fs.readFileSync(filePath, 'utf-8');
         res.setHeader('Content-Type', 'application/javascript');
         res.setHeader('Cache-Control', 'public, max-age=86400');
-        return res.sendFile(filePath);
+        return res.send(content);
       }
     } catch (e) {
       // Continue to next path
@@ -79,6 +76,7 @@ app.get('/chatbot.js', (req, res) => {
   res.status(404).json({ 
     success: false, 
     error: 'chatbot.js not found',
+    cwd: cwd,
     triedPaths: possiblePaths 
   });
 });
