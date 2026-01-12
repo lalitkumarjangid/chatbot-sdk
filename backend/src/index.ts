@@ -40,6 +40,11 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files (for SDK)
 app.use('/static', express.static(path.resolve(process.cwd(), 'public')));
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', message: 'Backend API is running' });
+});
+
 // API routes
 app.use('/api', routes);
 
@@ -52,24 +57,18 @@ app.get('/chatbot.js', (req, res) => {
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-// Start server
-const startServer = async (): Promise<void> => {
-  try {
-    // Connect to MongoDB
-    await connectDatabase();
+// Connect to MongoDB on initialization
+connectDatabase().catch(err => {
+  console.error('Failed to connect to MongoDB:', err);
+});
 
-    // Start listening
-    app.listen(config.port, () => {
-      console.log(`🚀 Server running on http://localhost:${config.port}`);
-      console.log(`📚 API available at http://localhost:${config.port}/api`);
-      console.log(`💬 SDK script at http://localhost:${config.port}/chatbot.js`);
-    });
-  } catch (error) {
-    console.error('Failed to start server:', error);
-    process.exit(1);
-  }
-};
-
-startServer();
+// Start server only in non-Vercel environments
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(config.port, () => {
+    console.log(`🚀 Server running on http://localhost:${config.port}`);
+    console.log(`📚 API available at http://localhost:${config.port}/api`);
+    console.log(`💬 SDK script at http://localhost:${config.port}/chatbot.js`);
+  });
+}
 
 export default app;

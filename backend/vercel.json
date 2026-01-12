@@ -2,28 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/index.js",
+      "src": "src/index.ts",
       "use": "@vercel/node"
-    },
-    {
-      "src": "dist/chatbot.js",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/chatbot.js",
-      "dest": "/dist/chatbot.js",
-      "headers": {
-        "cache-control": "public, max-age=3600"
-      }
-    },
-    {
       "src": "/(.*)",
-      "dest": "/dist/index.js"
+      "dest": "src/index.ts"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
