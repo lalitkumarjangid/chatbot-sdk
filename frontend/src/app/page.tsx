@@ -29,7 +29,15 @@ import {
 import Link from "next/link";
 
 // Get API URL from environment
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
+const getApiUrl = () => {
+  if (typeof window === 'undefined') {
+    return process.env.NEXT_PUBLIC_API_URL || "https://chatbot-sdk-backend.vercel.app";
+  }
+  return process.env.NEXT_PUBLIC_API_URL || 
+    (window.location.hostname === 'localhost' ? "http://localhost:5001" : "https://chatbot-sdk-backend.vercel.app");
+};
+
+const API_URL = getApiUrl();
 const SDK_URL = `${API_URL}/chatbot.js`;
 
 export default function Home() {
