@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Reset styles for the widget container */
 #vet-chatbot-container * {
   box-sizing: border-box;
