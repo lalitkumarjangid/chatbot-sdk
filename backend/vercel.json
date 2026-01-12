@@ -9,20 +9,5 @@
     "src/index.ts": {
       "runtime": "nodejs@20.x"
     }
-  },
-  "headers": [
-    {
-      "source": "/chatbot.js",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        },
-        {
-          "key": "Content-Type",
-          "value": "application/javascript"
-        }
-      ]
-    }
-  ]
+  }
 }
