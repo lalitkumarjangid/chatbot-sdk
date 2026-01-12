@@ -37,8 +37,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files (for SDK)
-app.use('/static', express.static(path.resolve(process.cwd(), 'public')));
+// Serve static files (for SDK and demo pages)
+app.use(express.static(path.resolve(process.cwd(), 'public')));
 
 // Health check endpoint
 app.get('/health', (req, res) => {
