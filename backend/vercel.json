@@ -1,7 +1,28 @@
 {
   "version": 2,
-  "buildCommand": "npm run build && npm run build:widget",
-  "outputDirectory": "dist",
+  "builds": [
+    {
+      "src": "dist/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/chatbot.js",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/chatbot.js",
+      "dest": "/dist/chatbot.js",
+      "headers": {
+        "cache-control": "public, max-age=3600"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/index.js"
+    }
+  ],
   "env": {
     "NODE_ENV": "production"
   }

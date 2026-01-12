@@ -12,9 +12,22 @@ validateConfig();
 // Create Express app
 const app = express();
 
-// CORS configuration - allow all origins for development (including file://)
+// CORS configuration
 app.use(cors({
-  origin: true,  // Allow all origins in development
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    
+    // In development, allow all origins
+    if (config.nodeEnv === 'development') return callback(null, true);
+    
+    // In production, check against whitelist
+    if (config.corsOrigins.includes(origin) || config.corsOrigins.includes('*')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Session-Id'],
