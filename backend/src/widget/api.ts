@@ -33,7 +33,7 @@ export class ChatAPI {
       throw new Error('Failed to send message');
     }
 
-    return response.json();
+    return (await response.json()) as ChatResponse;
   }
 
   async getHistory(sessionId: string): Promise<{ messages: ChatMessage[] }> {
@@ -48,7 +48,7 @@ export class ChatAPI {
       throw new Error('Failed to fetch history');
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as { data: { messages: ChatMessage[] } };
     return data.data;
   }
 }
